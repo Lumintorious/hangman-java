@@ -4,13 +4,12 @@ class Game {
     public static final int MAX_TRIES = 7;
     private Prompter prompter;
     private String answer;
-    private String hits;
+    private String hits = "";
     private String misses = "";
 
-    public Game(String answer) {
+    public Game(String answer, Prompter prompter) {
         this.answer = answer.toLowerCase();
-        hits = "";
-        misses = "";
+        setPrompter(prompter);
     }
 
     public void setPrompter(Prompter prompter) {
@@ -94,7 +93,7 @@ class Game {
         return getCurrentProgress().indexOf('-') == -1;
     }
 
-    public void gameLoop() {
+    public static void gameLoop() {
         while (prompter.promptForRetry()) {
             Game game = new Game(WordBank.getRandomWord());
             Prompter prompter = new Prompter(game);
